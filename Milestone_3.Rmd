@@ -1,0 +1,44 @@
+---
+title: "Milestone 3 -- Final Project"
+author: "Bridger Gordon"
+date: "10/4/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(readxl)
+library(readstata13)
+library(janitor)
+```
+
+## Description of Final Project and Data
+
+Earlier this week, I found out that Facebook keeps track of a "social connectedness" index score between every American county -- which shows the relative probability of a social connection between two places. I found this really interesting because it could show the social worlds that Americans interact in and if those are limited by geography, class, race, etc. So, I emailed into Facebook and surprisingly they responded immediately and agreed to share the data with me. So the first three files I've loaded in are the Facebook social connectedness index scores. I've also added in county demographic data from the American Economic Association in order to analyze how the differences in social connectedness are influenced by social/political/economic factors.
+
+```{r data_loading}
+
+# This first CSV file is just the county ids (so it matches the counties names with the IDs that are used in the other datasets to refer to a county).
+
+county_info_ids <- read.csv("raw-data/County_info.csv") %>%
+  clean_names()
+
+# This second CSV file shows the relative probability of a social connection between two counties in the US.
+
+county_county_connections <- read.csv("raw-data/County_County.csv") %>%
+  clean_names()
+
+# This third CSV file shows the relative probability of a social connection with an American county and a foreign country.
+
+county_country_connections <- read.csv("raw-data/County_Country.csv") %>%
+  clean_names()
+
+# This Stata file shows the demographic information about any given county, including race, political preference, etc.
+
+county_demographics <- read.dta13("raw-data/County_Demographics.dta") %>%
+  clean_names()
+
+```
+
+
